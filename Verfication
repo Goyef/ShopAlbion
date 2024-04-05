@@ -24,8 +24,8 @@
                       <label for="message">Message</label>
                     </div>
                   </div>
-                  <!-- Vos champs de formulaire ici -->
-                  <input type="submit" id="button" value="Envoyer">
+<!-- sa c'est le bouton envoyez--!>
+<input type="submit" id="button" value="Envoyer">
                 </form>
               </div>
             </li>
@@ -33,8 +33,8 @@
 $(document).ready(function () {
       emailjs.init("lo4AhKedFQzMNqU8R");
 
-      // Fonction pour valider une adresse e-mail
-      function validateEmail(email) {
+//sa verifie que il a le gmail
+function validateEmail(email) {
         var re = /\S+@\S+\.\S+/;
         return re.test(email);
       }
@@ -44,17 +44,17 @@ $(document).ready(function () {
         var email = $('#email').val();
         var message = $('#message').val();
 
-        // Vérifier si l'e-mail est valide
-        if (!validateEmail(email)) {
+// Sa verifie le mail
+if (!validateEmail(email)) {
           alert("Veuillez entrer une adresse e-mail valide.");
           return false; // Empêche l'envoi du formulaire si l'e-mail n'est pas valide
         }
 
-        // Extraire le domaine de l'e-mail
+        //Verfie  le domaine du mail
         var emailParts = email.split('@');
         var domain = emailParts[emailParts.length - 1];
 
-        // Vérifier si le domaine est "gmail.com"
+        // Verifie si le domaine est "gmail.com"
         if (domain.toLowerCase() !== 'gmail.com') {
           alert("Veuillez utiliser une adresse e-mail Gmail.");
           return false; // Empêche l'envoi du formulaire si le domaine n'est pas "gmail.com"
@@ -75,9 +75,9 @@ $(document).ready(function () {
         return false; // Empêche le formulaire d'être soumis normalement
       }
 
-      // Soumission du formulaire
+      //et sa sa envoie si tout va bien 
       $('.work-request').submit(function (event) {
         event.preventDefault(); // Empêche le formulaire d'être soumis normalement
-        sendEmail(); // Appelle la fonction pour envoyer l'e-mail
+        sendEmail(); // reprend la fonction pour envoyer l'e-mail
       });
     });
