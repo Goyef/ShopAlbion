@@ -31,7 +31,7 @@
             </li>
 
 $(document).ready(function () {
-      emailjs.init("lo4AhKedFQzMNqU8R");
+      emailjs.init("lo4AhKedFQzMNqU8R"); Sa c'est la cléprv sur le truc du mail
 
 //sa verifie que il a le gmail
 function validateEmail(email) {
@@ -72,7 +72,7 @@ if (!validateEmail(email)) {
           alert('Erreur lors de l\'envoi de l\'e-mail !');
         });
 
-        return false; // Empêche le formulaire d'être soumis normalement
+        return false; // Envoie pas le formulaire normalement si ça pue
       }
 
       //et sa sa envoie si tout va bien 
