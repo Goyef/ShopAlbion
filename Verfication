@@ -1,0 +1,83 @@
+<!--Verification--!> sa verifie que le mail il a gmail.com
+
+<!-- Sa c'est le form pour la partie contact--!>
+<li class="l-section section">
+              <div class="hire">
+                <h2>Contacter-moi</h2>
+                <form class="work-request" onsubmit="return validateForm()">
+                  <div class="work-request--options">
+                    <!-- Options checkboxes -->
+                  </div>
+                  <div class="work-request--information">
+                    <div class="information-name">
+                      <input id="name" type="text" spellcheck="false">
+                      <label for="name">Nom</label>
+                    </div>
+                    <div class="information-email">
+                      <input id="email" type="email" spellcheck="false" required>
+                      <label for="email">Mail</label>
+                    </div>
+                  </div>
+                  <div class="work-request--information">
+                    <div class="information-email centered">
+                      <input id="message" type="text">
+                      <label for="message">Message</label>
+                    </div>
+                  </div>
+                  <!-- Vos champs de formulaire ici -->
+                  <input type="submit" id="button" value="Envoyer">
+                </form>
+              </div>
+            </li>
+
+$(document).ready(function () {
+      emailjs.init("lo4AhKedFQzMNqU8R");
+
+      // Fonction pour valider une adresse e-mail
+      function validateEmail(email) {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
+      }
+
+      function sendEmail() {
+        var name = $('#name').val();
+        var email = $('#email').val();
+        var message = $('#message').val();
+
+        // Vérifier si l'e-mail est valide
+        if (!validateEmail(email)) {
+          alert("Veuillez entrer une adresse e-mail valide.");
+          return false; // Empêche l'envoi du formulaire si l'e-mail n'est pas valide
+        }
+
+        // Extraire le domaine de l'e-mail
+        var emailParts = email.split('@');
+        var domain = emailParts[emailParts.length - 1];
+
+        // Vérifier si le domaine est "gmail.com"
+        if (domain.toLowerCase() !== 'gmail.com') {
+          alert("Veuillez utiliser une adresse e-mail Gmail.");
+          return false; // Empêche l'envoi du formulaire si le domaine n'est pas "gmail.com"
+        }
+
+        emailjs.send("service_j0nqbhy", "template_th7wb9a", {
+          from_name: name,
+          reply_to: email,
+          message: message // Ajout du message dans le mail
+        }).then(function (response) {
+          console.log('E-mail envoyé avec succès !', response);
+          alert('E-mail envoyé avec succès !');
+        }, function (error) {
+          console.log('Erreur lors de l\'envoi de l\'e-mail : ', error);
+          alert('Erreur lors de l\'envoi de l\'e-mail !');
+        });
+
+        return false; // Empêche le formulaire d'être soumis normalement
+      }
+
+      // Soumission du formulaire
+      $('.work-request').submit(function (event) {
+        event.preventDefault(); // Empêche le formulaire d'être soumis normalement
+        sendEmail(); // Appelle la fonction pour envoyer l'e-mail
+      });
+    });
